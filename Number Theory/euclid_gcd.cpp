@@ -11,9 +11,9 @@ int gcd(int a, int b) {//O(logn)
 int main () {
     int a,b;
     cin >> a >> b;
-    int lcm = (a*b)/__gcd(a,b);
+    int lcm = ((a*b)/gcd(a,b) + 10000007) % 10000007;
     cout << lcm << endl;
-    cout << __gcd(a,b) << endl;
+    cout << (gcd(a,b) + 10000007) % 10000007 << endl;
     //cout << gcd(10,15) << endl;
 
 }

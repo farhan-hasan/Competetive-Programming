@@ -1,63 +1,46 @@
-#include <bits/stdc++.h>
+//on the name of Allah:)
+#include<bits/stdc++.h>
+#define int         long long
+#define endl        "\n"
+#define pi          2 * acos(0.0)
+#define mod         1000000007
+#define Mul(a,b)    (a%mod * b%mod)%mod
+#define Add(a,b)    (a%mod + b%mod)%mod
+#define all(x)      (x).begin(),(x).end()
+#define allr(x)     (x).rbegin(),(x).rend()
+#define gcd(x, y)   (__gcd(x, y))
+#define lcm(x, y)   ((x/gcd(x, y))*y)
+#define faster      cin.tie(NULL), cout.tie(NULL);
+#define TC          int t ; cin>>t ; while (t--)
+const int N = 1e9 + 7;
 using namespace std;
-#define int long long
-const int MAX = 1e5 + 10;
-int arr[MAX];
-int tree[MAX*4];
 
-void init(int node,int b, int e)
-{
-    if(b==e)
-    {
-        tree[node] = arr[b];
-        return;
+
+void s()
+{   
+    int m;
+    string n;
+    cin >> m >> n;
+    int pref[m];
+    vector<int>v(m);
+    for(int i=0;i<m;i++) {
+        v[i] = n[i] = '0';
     }
-    int left = node * 2 + 1;
-    int right = node * 2 + 2;
-    int mid = (b+e)/2;
-    init(left,b,mid);
-    init(right,mid+1,e);
+    for(auto it:v) {
+        cout << it << endl;
+    }
 
-    tree[node] = tree[left]+tree[right];
 }
-int query(int node,int b,int e,int i,int j)
-{
-    if(i > e|| j < b)
-    {
-        return 0;
-    }
-    if(b >= i && e <=j)
-    {
-        return tree[node];
-    }
-    int left = node * 2 + 1;
-    int right = node * 2 + 2;
-    int mid = (b+e)/2;
-    int leftSum = query(left,b,mid,i,j);
-    int rightSum = query(right,mid+1,e,i,j);
-    return leftSum+rightSum;
-}
-void update(int node,int b,int e,int target,int val)
-{
-    if(target > e || target < b)
-    {
-        return;
-    }
-    if(b==e && b==target)
-    {
-        tree[node] = val;
-        return;
-    }
-    int left = node * 2 + 1;
-    int right = node * 2 + 2;
-    int mid = (b+e)/2;
 
-    update(left,b,mid,target,val);
-    update(right,mid+1,e,target,val);
-
-    tree[node] = tree[left]+tree[right];
-}
 int32_t main()
-{
+{   ios::sync_with_stdio(false);
+
+    TC
+    s();
+
 
 }
+
+
+
+

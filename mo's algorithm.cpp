@@ -21,23 +21,34 @@ bool cmp(range a,range b) {
 
 int main () {
 
-    int n;
-    cin >> n;
+    int n , q;
+    cin >> n >> q;
     sqrtt=sqrt(n)+1;
     int arr[n];
     for(int i=0;i<n;i++) {
         cin >> arr[i];
     }
-    int q;
-    cin >> q;
     range query[q];
     int index=0;
     for(int i=0;i<q;i++) {
         int l,r;
         cin >> l >> r;
-        query[i].left = l;
-        query[i].right = r;
+        query[i].left = --l;
+        query[i].right = --r;
         query[i].idx = i;
+    }
+    for (int i = 0; i < q; ++i)   {    // is the query sorted?    {
+         int ql = query[i].left;
+        int qr = query[i].right;
+        cout<<ql<<" "<<qr<<" "<<query[i].idx<<endl;
+
+    }cout << endl;
+    sort(query, query + q, cmp);
+    for (int i = 0; i < q; ++i)   {    // is the query sorted?    {
+         int ql = query[i].left;
+        int qr = query[i].right;
+        cout<<ql<<" "<<qr<<" "<<query[i].idx<<endl;
+
     }
     vector<int>ans(q);
     int cl=-1,cr=-1,lsum=0,rsum=0;
