@@ -30,7 +30,7 @@ void s()
     int x;
     cin >> x;
     
-    cout << fib(x) << endl;
+    cout << fib(x) % mod << endl;
 
 }
 int32_t main()

@@ -1,46 +1,66 @@
-//on the name of Allah:)
 #include<bits/stdc++.h>
-#define int         long long
-#define endl        "\n"
-#define pi          2 * acos(0.0)
-#define mod         1000000007
-#define Mul(a,b)    (a%mod * b%mod)%mod
-#define Add(a,b)    (a%mod + b%mod)%mod
-#define all(x)      (x).begin(),(x).end()
-#define allr(x)     (x).rbegin(),(x).rend()
-#define gcd(x, y)   (__gcd(x, y))
-#define lcm(x, y)   ((x/gcd(x, y))*y)
-#define faster      cin.tie(NULL), cout.tie(NULL);
-#define TC          int t ; cin>>t ; while (t--)
-const int N = 1e9 + 7;
 using namespace std;
+#define int long long
+const int MX = 1e6 + 10;
+int arr[MX];
+int tree[MX];
 
+void init(int node, int b, int e) {
 
-void s()
-{   
-    int m;
-    string n;
-    cin >> m >> n;
-    int pref[m];
-    vector<int>v(m);
-    for(int i=0;i<m;i++) {
-        v[i] = n[i] = '0';
+    if(b==e) {
+        tree[node] = arr[b];
+        return;
     }
-    for(auto it:v) {
-        cout << it << endl;
-    }
+    int left = node * 2 + 1;
+    int right = node * 2 + 2;
+    int mid = (b+e)/2;
+    init(left,b,mid);
+    init(right,mid+1,e);
+    tree[node] = min(tree[left],tree[right]);
 
 }
 
-int32_t main()
-{   ios::sync_with_stdio(false);
+int query(int node, int b,int e, int i, int j) {
 
-    TC
-    s();
+    if(i>e||j<b) {
+        return INT_MAX;
+    }
+    if(b>=i&&e<=j) {
+        return tree[node];
+    }
+    int left = node * 2 + 1;
+    int right = node * 2 + 2;
+    int mid = (b+e)/2;
+    int leftMin = query(left,b,mid,i,j);
+    int rightMin = query(right,mid+1,e,i,j);
+    return min(leftMin,rightMin);
 
 
 }
 
 
+int32_t main () {
 
+    int t,casee=1;;
+    cin >> t;
 
+    while(t--) {
+        fill_n(tree, MX, MX);
+        string s;
+        getline(cin,s);
+        cin.ignore();
+        int n,q;
+        cin >> n >> q;
+        for(int i=0;i<n;i++) {
+            cin >> arr[i];
+        }
+        init(0,0,n-1);
+        cout << "Case " << casee << ":" << endl;
+        while(q--) {
+            int l,r;
+            cin >> l >> r;
+            cout << query(0,0,n-1,l-1,r-1) << endl;
+        }
+        casee++;
+    }
+}
